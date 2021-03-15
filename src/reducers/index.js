@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import searchReducer from './SearchReducer';
 import animeReducer from './AnimeReducer';
-export default combineReducers({ searchReducer, animeReducer });
+import loadingReducer from './LoadingReducer';
+export default combineReducers({ animeReducer, loadingReducer });

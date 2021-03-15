@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, Dimensions} from 'react-native';
 import Card from './Card';
+import LoadMore from './LoadMore';
 import {getAnimeList, getApiCallUrl} from '../actions/Anime';
 
 export class CardList extends Component {
@@ -10,35 +11,45 @@ export class CardList extends Component {
     await this.props.getApiCallUrl('naruto');
     await this.props.getAnimeList('naruto');
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.animeList.length !== prevProps.animeList.length) {
+      return true;
+    }
+  }
   render() {
-    const {animeList} = this.props;
+    const {animeList, isLoading} = this.props;
     return (
-      <ScrollView
-        style={styles.cardListContainer}
-        contentContainerStyle={{
-          flexGrow: 2,
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        }}
-        contentInsetAdjustmentBehavior="automatic"
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}>
-        {animeList.map((anime, index) => {
-          return (
-            <Card
-              key={anime.mal_id}
-              title={anime.title}
-              imageUrl={anime.image_url}
-            />
-          );
-        })}
-      </ScrollView>
+      <View>
+        <ScrollView
+          style={styles.cardListContainer}
+          contentContainerStyle={{
+            flex: 1,
+            flexGrow: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          contentInsetAdjustmentBehavior="automatic"
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}>
+          {animeList.map((anime, index) => {
+            return (
+              <Card
+                key={index}
+                title={anime.title}
+                imageUrl={anime.image_url}
+              />
+            );
+          })}
+          {isLoading ? <View></View> : <LoadMore />}
+        </ScrollView>
+      </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
   animeList: state.animeReducer.animeList,
+  isLoading: state.loadingReducer.isLoading,
 });
 export default connect(mapStateToProps, {
   getAnimeList,
@@ -51,5 +62,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 5,
+    height: 600,
   },
 });

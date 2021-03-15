@@ -19,30 +19,23 @@ export class CardList extends Component {
   render() {
     const {animeList, isLoading} = this.props;
     return (
-      <View>
-        <ScrollView
-          style={styles.cardListContainer}
-          contentContainerStyle={{
-            flex: 1,
-            flexGrow: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          contentInsetAdjustmentBehavior="automatic"
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}>
-          {animeList.map((anime, index) => {
-            return (
-              <Card
-                key={index}
-                title={anime.title}
-                imageUrl={anime.image_url}
-              />
-            );
-          })}
-          {isLoading ? <View></View> : <LoadMore />}
-        </ScrollView>
-      </View>
+      <ScrollView
+        style={styles.cardListContainer}
+        contentContainerStyle={{
+          flexGrow: 2,
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+        }}
+        contentInsetAdjustmentBehavior="automatic"
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
+        {animeList.map((anime, index) => {
+          return (
+            <Card key={index} title={anime.title} imageUrl={anime.image_url} />
+          );
+        })}
+        {isLoading ? <View></View> : <LoadMore />}
+      </ScrollView>
     );
   }
 }
@@ -62,6 +55,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 5,
-    height: 600,
+    marginBottom: 10,
   },
 });

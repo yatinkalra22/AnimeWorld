@@ -16,16 +16,10 @@ export default function(state = initialState, action) {
                 animeList: action.payload,
             };
         case ADD_ANIME_TO_THE_LIST:
-            var newArr = state.animeList.concat(action.payload);
             return {
                 ...state,
-                animeList: newArr,
+                animeList: [...state.animeList, ...action.payload],
             };
-            // // can only add one element
-            // return {
-            //     ...state,
-            //     animeList: [...state.animeList, action.payload[0]],
-            // };
         case REQUEST_API_URL:
             return {
                 ...state,

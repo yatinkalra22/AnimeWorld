@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, StyleSheet, ScrollView, Dimensions} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  ActivityIndicator,
+} from 'react-native';
 import Card from './Card';
 import LoadMore from './LoadMore';
 import {getAnimeList, getApiCallUrl} from '../actions/Anime';
@@ -29,11 +35,19 @@ export class CardList extends Component {
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
-        {animeList.map((anime, index) => {
-          return (
-            <Card key={index} title={anime.title} imageUrl={anime.image_url} />
-          );
-        })}
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#00ff00" />
+        ) : (
+          animeList.map((anime, index) => {
+            return (
+              <Card
+                key={index}
+                title={anime.title}
+                imageUrl={anime.image_url}
+              />
+            );
+          })
+        )}
         {isLoading ? <View></View> : <LoadMore />}
       </ScrollView>
     );

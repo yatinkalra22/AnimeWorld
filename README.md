@@ -1,5 +1,9 @@
 # AnimeWorld Mobile App
 
+**ANDROID APP URL**
+
+Download - [http://bit.ly/3lmuPye]
+
 **Installation**
 
 ```
@@ -26,9 +30,8 @@ cd android
 
 # API Source:
 
-```
-Search - https://api.jikan.moe/v3/search/anime?q=naruto
-Search With Limit - https://api.jikan.moe/v3/search/anime?q=naruto&limit=16
-Search With Page Number - https://api.jikan.moe/v3/search/anime?q=naruto&limit=16&page=1
+Search - [https://api.jikan.moe/v3/search/anime?q=naruto]
 
-```
+Search With Limit - [https://api.jikan.moe/v3/search/anime?q=naruto&limit=16]
+
+Search With Page Number - [https://api.jikan.moe/v3/search/anime?q=naruto&limit=16&page=1]
